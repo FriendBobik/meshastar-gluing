@@ -1,0 +1,184 @@
+PLATFORM linux hard_pin=1 cpu=1 pid=9 threads=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.230747 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.160331 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.185248 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.183916 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.180374 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.16504 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.177041 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.165584 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.172917 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.159543 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.176209 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.16704 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.185209 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.167124 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.186125 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.163583 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.17925 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.171958 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.181292 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.162582 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.189584 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.16179 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.180998 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.159375 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.339917 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.166958 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.185876 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.1605 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.180708 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.173206 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.195125 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.162625 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.185459 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.170876 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.190834 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.153084 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.183919 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.172042 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.189374 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.166291 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.178459 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.171666 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.175792 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.173918 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.193707 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.16846 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.186041 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.172916 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.181459 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.155375 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.192168 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.175499 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.18275 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.180334 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.187582 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.166166 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.216792 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.165166 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.179335 enabled=1
+Motion Primitives loaded successfully from data/add_control_set.txt
+Mesh Configurations loaded successfully from data/add_mesh_info.txt
+PRECOMPUTE control=add cpu_ms=0.163125 enabled=1
+Motion Primitives loaded successfully from data/base_control_set.txt
+Mesh Configurations loaded successfully from data/base_mesh_info.txt
+PRECOMPUTE control=base cpu_ms=0.179833 enabled=1

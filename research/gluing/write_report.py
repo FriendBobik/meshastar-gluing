@@ -2,9 +2,11 @@ from pathlib import Path
 import json,shutil
 p=Path(__file__).resolve().parent;r=p/'report';r.mkdir(exist_ok=True)
 s=json.loads((p/'results/confirmation_summary.json').read_text());h=json.loads((p/'results/holdout/summary.json').read_text());hm=json.loads((p/'results/holdout/by_map.json').read_text());profile=json.loads((p/'results/profile/summary.json').read_text())
+lx=json.loads((p/'results/linux_compare/summary.json').read_text())
 import subprocess,sys
 subprocess.run([sys.executable,str(r/'prepare_fonts.py')],check=True)
 shutil.copy(p/'figures/sessions.png',r/'sessions.png')
+for f in ('compare_time.png','compare_ops.png'):shutil.copy(p/'figures'/f,r/f)
 def num(x,d=2):return f'{x:,.{d}f}'.replace(',','\\,').replace('.',',')
 def esc(x):return x.replace('_',r'\_')
 def table(spec,header,rows):return '\\begin{tabular}{@{}'+spec+'@{}}\n\\toprule\n'+' & '.join(header)+r' \\'+'\n\\midrule\n'+'\n'.join(' & '.join(row)+r' \\' for row in rows)+'\n\\bottomrule\n\\end{tabular}'
@@ -19,6 +21,9 @@ counterrows=[]
 for field,label in [('push','Вставки в OPEN'),('pop','Извлечения из OPEN'),('heuristic_calls','Расчёты эвристики'),('prune_calls','Вызовы pruning'),('final_entries','Просмотр элементов Finals'),('cell_checks','Все проверки клеток'),('stale','Удаление дубликатов')]:
  vals=[profile[v]['counters'][field] for v in ['baseline','previous','zero_chain','glued']]
  counterrows.append([label]+[num(x/1e6,3) for x in vals])
+LXNAMES=[('glued','Склейка при генерации'),('glued_closed','Склейка + компактный CLOSED'),('chain_on_pop','Сжатие при извлечении'),('chain_on_pop_closed','Сжатие при извлечении + компактный CLOSED')]
+lxrows=[[label]+[r'$-$'+num(lx[k]['variants'][v]['reduction_pct'],1)+r'\%' for k in ('core','holdout')]+[str(lx['core']['variants'][v]['wins'])+'/24',str(len(lx['core']['variants'][v]['cost_mismatches'])+len(lx['holdout']['variants'][v]['cost_mismatches']))] for v,label in LXNAMES]
+gc=lx['core']['variants']['glued_closed'];gh=lx['holdout']['variants']['glued_closed']
 content=r'''\documentclass[11pt,a4paper]{article}
 \usepackage{fontspec}
 \setmainfont{Serif.ttf}[Path=fonts/,BoldFont=SerifBold.ttf,ItalicFont=SerifItalic.ttf,BoldItalicFont=SerifBoldItalic.ttf]
@@ -41,7 +46,7 @@ content=r'''\documentclass[11pt,a4paper]{article}
 {\LARGE Склеивание цепочек в MeshA*}\par
 {\small Проверка ускорения, 29 октября 2026 года}
 
-Новая реализация сократила CPU-время на 16,4\% на основном наборе и на 9,1\% на отложенных картах. На задачах основного набора, где путь найден, сокращение составило 7,4\%. Выигрыш есть, но его величина зависит от задач и нагрузки на Mac.
+Новая реализация сократила CPU-время на 16,4\% на основном наборе и на 9,1\% на отложенных картах. На задачах основного набора, где путь найден, сокращение составило 7,4\%. Выигрыш есть, но его величина зависит от задач и нагрузки на Mac. С компактным CLOSED (следствие леммы 1, см. дополнение) склейка на Linux сокращает время на 20,4\% и 18,4\%.
 
 Сравнение выполнено с \href{https://github.com/PathPlanning/MeshAStar}{исходной C++-реализацией MeshA*}. Сборки работают с весом эвристики \(w=1\), точным финишем, \code{C++17 -O3} и штатными runtime-проверками. В обеих версиях используется исходный CLOSED. Изменение с исключением internal из CLOSED из предыдущего опыта в это сравнение не включено.
 
@@ -121,6 +126,39 @@ content=r'''\documentclass[11pt,a4paper]{article}
 Для найденных путей проверены начало и финиш, все примитивы, их collision traces и сумма стоимости. При сравнении стоимости используется допуск \(\max(0{,}002,10^{-5}C)\), где \(C\) означает сумму стоимостей примитивов исходного пути. Дополнительно пройдены 20 ручных случаев с пустой картой, обходом стены, недостижимым финишем и совпадением старта с целью, а также тесты структуры макропутей.
 
 \newpage
+{\Large Дополнение: теория, компактный CLOSED и проверка на Linux}\par
+
+\textbf{Почему склейка корректна.} Обозначим конфигурацию \(\Psi\) как набор пар (примитив \(p\), номер его клетки \(k\)). Все пары одной конфигурации имеют одинаковый \(k\), а их примитивы совпадают по первым \(k+1\) клеткам следа. Конфигурация однозначно задаётся курсом \(\theta\) и этим общим префиксом.
+
+\emph{Лемма 1 (единственный предок).} У любой internal-клетки ровно один предок: сдвиг к нему равен шагу следа любого примитива из \(\Psi\), а конфигурация предка состоит из всех незакончившихся примитивов пучка с префиксом на одну клетку короче. Поэтому развёртка каждого пучка — дерево, и internal-клетка порождается не более одного раза.
+
+\emph{Лемма 2 (\(f\) постоянно на цепочке).} Если у internal-клетки \(u\) единственный потомок \(w\) и он internal, то ни один примитив не заканчивается и все делают одинаковый шаг. Значит, в \(w\) те же примитивы, а множество концов \(\mathrm{Finals}(w)=\mathrm{Finals}(u)\). Отсюда \(g(w)=g(u)\), \(h(w)=h(u)\), \(f(w)=f(u)\).
+
+\emph{Теорема.} Поиск, в котором цепочка заменена одним ребром той же стоимости, а все её клетки проверены на столкновения, — это A* на графе с теми же путями и стоимостями. Согласованность \(h\) сохраняется: \(h(u)\le h(w_1)\le\dots\le h(e)\le c(e,x)+h(x)\), цель всегда initial и не может оказаться внутри цепочки. Следовательно, поиск полон и оптимален при согласованной эвристике. Условия лемм проверяет \code{MacroPaths::build}; скрипт \code{verify_tree.py} подтверждает их на всех таблицах: 864 и 368 internal-конфигураций, 364 и 204 звена цепочек.
+
+\emph{Следствие (компактный CLOSED).} Internal-клетки не повторяются, поэтому хранить их в CLOSED не нужно. Флаг \code{COMPACT_CLOSED} оставляет в CLOSED только initial-клетки со слоем \(\theta\): 16 слоёв вместо 1800, при карте \(1200\times1200\) — 2,7~МиБ вместо 309~МиБ. Режим включается только если \code{MacroPaths} подтвердил структуру дерева. В корневом CLI он включён по умолчанию (\code{make COMPACT_CLOSED=0} — выключить).
+
+\textbf{Сравнение на Linux.} Скрипт \code{run_compare.py} запускает пять вариантов из одних исходников: исходный MeshA*, склейку при генерации, склейку с компактным CLOSED, сжатие цепочки при извлечении вершины (альтернативная реализация, \code{GLUING_MODE=4}) и его вариант с компактным CLOSED. Основной набор — два сеанса по пять замеров с обратным порядком вариантов, отложенные карты — три замера. Каждый процесс однопоточный и закреплён за своим CPU через \code{sched_setaffinity}, одновременно работали два процесса на разных CPU. Машина: @@LXPLATFORM@@.
+
+\begin{center}\small
+@@LX_TABLE@@
+\end{center}
+
+Лучший вариант — склейка с компактным CLOSED: на основном наборе CPU-время меньше на @@GC_CORE@@ (95\%-интервал ускорения @@GC_CORE_CI@@), на отложенных картах — на @@GC_HOLD@@. Склейка без компактного CLOSED дала @@G_CORE@@ на основном наборе, что согласуется с серией на M1 (16,4\%).
+
+\begin{center}
+\includegraphics[width=0.98\linewidth]{compare_time.png}
+\end{center}
+
+\begin{center}
+\includegraphics[width=0.66\linewidth]{compare_ops.png}
+\end{center}
+
+Склейка при генерации кладёт в OPEN одну вершину на цепочку, поэтому сильнее сокращает вставки и расчёты эвристики. Сжатие при извлечении сильнее сокращает просмотр Finals, но кладёт в очередь потомков конца цепочки. Компактный CLOSED не меняет число операций: выигрыш даёт маска, которая помещается в кэш процессора. Число удалённых дубликатов (initial-клетки) растёт, но дубликатов internal-клеток нет ни в одном варианте.
+
+Ограничения: на отложенных картах только три замера; одновременно работали два процесса, поэтому возможна взаимная нагрузка на память; результаты относятся к этой машине и этим задачам.
+
+\newpage
 {\Large Повторяемость и запуск}\par
 
 Измерения выполнены на Apple M1 с восемью ядрами. У программы один вычислительный поток. Основное время получено через \code{CLOCK_THREAD_CPUTIME_ID}, обычное время записано через \code{steady_clock}. Это убирает из основной метрики паузы вытеснения потока, но не влияние частоты CPU и кэшей.
@@ -131,7 +169,7 @@ content=r'''\documentclass[11pt,a4paper]{article}
 \includegraphics[width=0.77\linewidth]{sessions.png}
 \end{center}
 
-Код также поддерживает \href{https://man7.org/linux/man-pages/man2/sched_setaffinity.2.html}{\code{sched_setaffinity}} в Linux. Там выбирается разрешённое ядро и проверяется результат закрепления. Linux-прогон здесь не выполнялся. Полученные проценты относятся к этому Mac и этим наборам задач.
+Код также поддерживает \href{https://man7.org/linux/man-pages/man2/sched_setaffinity.2.html}{\code{sched_setaffinity}} в Linux. Там выбирается разрешённое ядро и проверяется результат закрепления. Linux-прогон основной серии ABBA/BAAB здесь не выполнялся; сравнение вариантов на Linux приведено в дополнении. Проценты основной серии относятся к этому Mac и этим наборам задач.
 
 В \href{../results/confirm/manifest.json}{журнале основной серии} сохранены команды, порядок, семена и хеши бинарников. \href{../data_manifest.json}{Манифест данных} и \href{../snapshot_hashes.json}{контрольные суммы исходников} позволяют проверить входные файлы. Сырые CSV сохранены для каждого процесса. Никакие неудобные повторы из основной серии не удалялись.
 
@@ -160,5 +198,11 @@ content=content.replace('@@MAP_TABLE@@',table('lrrrr',['Карта','Задач'
 content=content.replace('@@SESSION_TABLE@@',table('llrrr',['Сеанс','Порядок','Исходная','Склейка','Меньше CPU'],sessionrows))
 content=content.replace('@@HOLD_TABLE@@',table('lrrrr',['Карта','Исходная','Прежняя','Нулевая','Полная'],holdrows))
 content=content.replace('@@COUNTER_TABLE@@',table('lrrrr',['Операции, млн','Исходная','Прежняя','Нулевая','Полная'],counterrows))
+import platform as _pl
+content=content.replace('@@LX_TABLE@@',table('lrrrr',['Вариант','Основной','Отложенные','Быстрее','Расхождений'],lxrows))
+content=content.replace('@@LXPLATFORM@@',esc(lx.get('platform','Linux')) if 'platform' in lx else 'Linux-ВМ, 4 виртуальных CPU')
+fmtp=lambda x:num(x['reduction_pct'],1)+r'\%'
+content=content.replace('@@GC_CORE@@',fmtp(gc)).replace('@@GC_HOLD@@',fmtp(gh)).replace('@@G_CORE@@',fmtp(lx['core']['variants']['glued']))
+content=content.replace('@@GC_CORE_CI@@',num(gc['ci95_speedup'][0],2)+'--'+num(gc['ci95_speedup'][1],2)+r'\,$\times$')
 (r/'main.tex').write_text(content)
 print(r/'main.tex')

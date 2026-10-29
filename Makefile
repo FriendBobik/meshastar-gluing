@@ -1,5 +1,10 @@
 CXX ?= c++
 CPPFLAGS += -Iinclude
+# Компактный CLOSED для MeshA* (только initial-клетки, следствие леммы 1). Выключить: make COMPACT_CLOSED=0
+COMPACT_CLOSED ?= 1
+ifeq ($(COMPACT_CLOSED),1)
+CPPFLAGS += -DCOMPACT_CLOSED
+endif
 CXXFLAGS ?= -std=c++17 -O3 -Wall -Wextra
 LDFLAGS ?=
 
@@ -19,7 +24,7 @@ obj/%.o: src/%.cpp
 
 -include $(DEPS)
 
-test:
+test: mesh_astar
 	bash research/gluing/test.sh
 
 clean:

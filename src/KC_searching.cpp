@@ -178,6 +178,15 @@ SearchTree::SearchTree() {
     fast_closed.assign((total_states / 8) + 1, 0);
 }
 
+#ifdef COMPACT_CLOSED
+SearchTree::SearchTree(const vector<int> *theta_by_initial_config) {
+    // Только initial-клетки: слой = θ, поэтому NUM_HEADINGS слоёв вместо MAX_CONFIGS.
+    compact_theta = theta_by_initial_config;
+    uint64_t total_states = (uint64_t)MAX_MAP_HEIGHT * MAX_MAP_WIDTH * NUM_HEADINGS;
+    fast_closed.assign((total_states / 8) + 1, 0);
+}
+#endif
+
 static inline size_t index_in_closed(int i, int j, int layer_index) {
     /*
      Computes a unique linear index for a state (x, y, layer).
@@ -229,11 +238,18 @@ void SearchTree::add_to_closed(ptrSearchNode item) {
     // Access the union field generically (using 'config_id' which aliases 'theta')
     // This works because we unified the types in KC_structs.hpp
     int layer_index = v->config_id;
+#ifdef COMPACT_CLOSED
+    if (compact_theta) layer_index = (*compact_theta)[layer_index];
+    if (layer_index >= 0) {
+#endif
 
     size_t num = index_in_closed(v->i, v->j, layer_index);
 
     // Set the bit (OR operation)
     fast_closed[num / 8] |= (1 << (num % 8));
+#ifdef COMPACT_CLOSED
+    }
+#endif
 
     if (item->mem_after_closed) {
         expanded_nodes.push_back(item);
@@ -256,6 +272,12 @@ bool SearchTree::was_expanded(int i, int j, int layer_index) {
             layer_index >= 0 && layer_index < MAX_CONFIGS, "Invalid indices in was_expanded");
     #endif
 
+#ifdef COMPACT_CLOSED
+    if (compact_theta) {
+        layer_index = (*compact_theta)[layer_index];
+        if (layer_index < 0) return false;
+    }
+#endif
     size_t num = index_in_closed(i, j, layer_index);
 
     // Check if bit is set (AND operation)

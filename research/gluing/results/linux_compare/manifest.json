@@ -1,0 +1,284 @@
+{
+ "platform": "Linux-6.8.0-138-generic-aarch64-with-glibc2.35",
+ "machine": "aarch64",
+ "cpu_count": 4,
+ "clock": "CLOCK_THREAD_CPUTIME_ID",
+ "pinning": "sched_setaffinity, one process per CPU",
+ "parallel_jobs": 2,
+ "variants": [
+  "baseline",
+  "glued",
+  "glued_closed",
+  "chain_on_pop",
+  "chain_on_pop_closed"
+ ],
+ "runs": {
+  "core_s1_baseline": {
+   "command": [
+    "/sessions/rcw-016e7mb6aozcnkajvrz4kguh/mnt/meshastar-gluing/research/gluing/core.tsv",
+    "5",
+    "1",
+    "20261129",
+    "1"
+   ],
+   "binary": "baseline",
+   "cpu": 1,
+   "wall_s": 65.8,
+   "rows": 120
+  },
+  "core_s1_glued": {
+   "command": [
+    "/sessions/rcw-016e7mb6aozcnkajvrz4kguh/mnt/meshastar-gluing/research/gluing/core.tsv",
+    "5",
+    "1",
+    "20261129",
+    "2"
+   ],
+   "binary": "glued",
+   "cpu": 2,
+   "wall_s": 49.8,
+   "rows": 120
+  },
+  "core_s1_glued_closed": {
+   "command": [
+    "/sessions/rcw-016e7mb6aozcnkajvrz4kguh/mnt/meshastar-gluing/research/gluing/core.tsv",
+    "5",
+    "1",
+    "20261129",
+    "1"
+   ],
+   "binary": "glued_closed",
+   "cpu": 1,
+   "wall_s": 49.3,
+   "rows": 120
+  },
+  "core_s1_chain_on_pop": {
+   "command": [
+    "/sessions/rcw-016e7mb6aozcnkajvrz4kguh/mnt/meshastar-gluing/research/gluing/core.tsv",
+    "5",
+    "1",
+    "20261129",
+    "2"
+   ],
+   "binary": "chain_on_pop",
+   "cpu": 2,
+   "wall_s": 53.5,
+   "rows": 120
+  },
+  "core_s1_chain_on_pop_closed": {
+   "command": [
+    "/sessions/rcw-016e7mb6aozcnkajvrz4kguh/mnt/meshastar-gluing/research/gluing/core.tsv",
+    "5",
+    "1",
+    "20261129",
+    "1"
+   ],
+   "binary": "chain_on_pop_closed",
+   "cpu": 1,
+   "wall_s": 43.1,
+   "rows": 120
+  },
+  "core_s2_chain_on_pop_closed": {
+   "command": [
+    "/sessions/rcw-016e7mb6aozcnkajvrz4kguh/mnt/meshastar-gluing/research/gluing/core.tsv",
+    "5",
+    "1",
+    "20261229",
+    "1"
+   ],
+   "binary": "chain_on_pop_closed",
+   "cpu": 1,
+   "wall_s": 45.2,
+   "rows": 120
+  },
+  "core_s2_chain_on_pop": {
+   "command": [
+    "/sessions/rcw-016e7mb6aozcnkajvrz4kguh/mnt/meshastar-gluing/research/gluing/core.tsv",
+    "5",
+    "1",
+    "20261229",
+    "2"
+   ],
+   "binary": "chain_on_pop",
+   "cpu": 2,
+   "wall_s": 54.0,
+   "rows": 120
+  },
+  "core_s2_glued_closed": {
+   "command": [
+    "/sessions/rcw-016e7mb6aozcnkajvrz4kguh/mnt/meshastar-gluing/research/gluing/core.tsv",
+    "5",
+    "1",
+    "20261229",
+    "1"
+   ],
+   "binary": "glued_closed",
+   "cpu": 1,
+   "wall_s": 41.5,
+   "rows": 120
+  },
+  "core_s2_glued": {
+   "command": [
+    "/sessions/rcw-016e7mb6aozcnkajvrz4kguh/mnt/meshastar-gluing/research/gluing/core.tsv",
+    "5",
+    "1",
+    "20261229",
+    "2"
+   ],
+   "binary": "glued",
+   "cpu": 2,
+   "wall_s": 49.8,
+   "rows": 120
+  },
+  "core_s2_baseline": {
+   "command": [
+    "/sessions/rcw-016e7mb6aozcnkajvrz4kguh/mnt/meshastar-gluing/research/gluing/core.tsv",
+    "5",
+    "1",
+    "20261229",
+    "1"
+   ],
+   "binary": "baseline",
+   "cpu": 1,
+   "wall_s": 57.1,
+   "rows": 120
+  },
+  "holdout_baseline": {
+   "command": [
+    "/sessions/rcw-016e7mb6aozcnkajvrz4kguh/mnt/meshastar-gluing/research/gluing/holdout.tsv",
+    "3",
+    "1",
+    "20261129",
+    "2"
+   ],
+   "binary": "baseline",
+   "cpu": 2,
+   "wall_s": 32.0,
+   "rows": 72
+  },
+  "holdout_glued": {
+   "command": [
+    "/sessions/rcw-016e7mb6aozcnkajvrz4kguh/mnt/meshastar-gluing/research/gluing/holdout.tsv",
+    "3",
+    "1",
+    "20261129",
+    "1"
+   ],
+   "binary": "glued",
+   "cpu": 1,
+   "wall_s": 32.5,
+   "rows": 72
+  },
+  "holdout_glued_closed": {
+   "command": [
+    "/sessions/rcw-016e7mb6aozcnkajvrz4kguh/mnt/meshastar-gluing/research/gluing/holdout.tsv",
+    "3",
+    "1",
+    "20261129",
+    "2"
+   ],
+   "binary": "glued_closed",
+   "cpu": 2,
+   "wall_s": 23.2,
+   "rows": 72
+  },
+  "holdout_chain_on_pop": {
+   "command": [
+    "/sessions/rcw-016e7mb6aozcnkajvrz4kguh/mnt/meshastar-gluing/research/gluing/holdout.tsv",
+    "3",
+    "1",
+    "20261129",
+    "1"
+   ],
+   "binary": "chain_on_pop",
+   "cpu": 1,
+   "wall_s": 32.9,
+   "rows": 72
+  },
+  "holdout_chain_on_pop_closed": {
+   "command": [
+    "/sessions/rcw-016e7mb6aozcnkajvrz4kguh/mnt/meshastar-gluing/research/gluing/holdout.tsv",
+    "3",
+    "1",
+    "20261129",
+    "2"
+   ],
+   "binary": "chain_on_pop_closed",
+   "cpu": 2,
+   "wall_s": 23.2,
+   "rows": 72
+  },
+  "counts_baseline": {
+   "command": [
+    "/sessions/rcw-016e7mb6aozcnkajvrz4kguh/mnt/meshastar-gluing/research/gluing/core.tsv",
+    "1",
+    "0",
+    "20261229",
+    "1"
+   ],
+   "binary": "baseline_counts",
+   "cpu": 1,
+   "wall_s": 10.6,
+   "rows": 24
+  },
+  "counts_glued": {
+   "command": [
+    "/sessions/rcw-016e7mb6aozcnkajvrz4kguh/mnt/meshastar-gluing/research/gluing/core.tsv",
+    "1",
+    "0",
+    "20261229",
+    "2"
+   ],
+   "binary": "glued_counts",
+   "cpu": 2,
+   "wall_s": 7.9,
+   "rows": 24
+  },
+  "counts_glued_closed": {
+   "command": [
+    "/sessions/rcw-016e7mb6aozcnkajvrz4kguh/mnt/meshastar-gluing/research/gluing/core.tsv",
+    "1",
+    "0",
+    "20261229",
+    "1"
+   ],
+   "binary": "glued_closed_counts",
+   "cpu": 1,
+   "wall_s": 7.7,
+   "rows": 24
+  },
+  "counts_chain_on_pop": {
+   "command": [
+    "/sessions/rcw-016e7mb6aozcnkajvrz4kguh/mnt/meshastar-gluing/research/gluing/core.tsv",
+    "1",
+    "0",
+    "20261229",
+    "2"
+   ],
+   "binary": "chain_on_pop_counts",
+   "cpu": 2,
+   "wall_s": 8.2,
+   "rows": 24
+  },
+  "counts_chain_on_pop_closed": {
+   "command": [
+    "/sessions/rcw-016e7mb6aozcnkajvrz4kguh/mnt/meshastar-gluing/research/gluing/core.tsv",
+    "1",
+    "0",
+    "20261229",
+    "1"
+   ],
+   "binary": "chain_on_pop_closed_counts",
+   "cpu": 1,
+   "wall_s": 6.7,
+   "rows": 24
+  }
+ },
+ "bin_sha256": {
+  "baseline": "9b89ef3744e90a66adb921fd9ebd0991558cbca1a3d39aea0875c8a2405a52a8",
+  "glued": "7b0ba19554aa341952c9e4b5f88038cf2e328037032ef77e038cab806866ec89",
+  "glued_closed": "b324e83e92b59dad6faea7a122e2ab632cc53920d08d00dcbdf9a708441c0965",
+  "chain_on_pop": "c43b873a68f63f4cb01f5f4408ee9f775f609b604a8dacfaca223fb432d2b09d",
+  "chain_on_pop_closed": "799e62378f0b3803d6243c26fe8ba6526d63b2807f4d8bb175fed8ec80eca1c5"
+ }
+}

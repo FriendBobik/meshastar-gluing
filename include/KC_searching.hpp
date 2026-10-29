@@ -82,6 +82,13 @@ struct SearchTree {
 
     SearchTree();
 
+#ifdef COMPACT_CLOSED
+    // Компактный CLOSED (следствие леммы 1): если задан, хранятся только initial-клетки,
+    // слой = курс θ (NUM_HEADINGS слоёв). Internal-клетки не повторяются и не хранятся.
+    const vector<int> *compact_theta = nullptr;
+    explicit SearchTree(const vector<int> *theta_by_initial_config);
+#endif
+
     bool open_is_empty();
     void add_to_open(ptrSearchNode item);
     void add_to_closed(ptrSearchNode item);

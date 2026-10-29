@@ -77,6 +77,12 @@ rep='''        if (check_cell(task_map, i, j, &checked_cells) &&
 #endif
             ptrVertex u'''
 assert needle in t;t=t.replace(needle,rep);p0.write_text(t)
+# Дополнения: компактный CLOSED (флаг COMPACT_CLOSED) и сжатие при извлечении (GLUING_MODE 4), см. variants.py.
+import sys as _sys;_sys.path.insert(0,str(p))
+import variants as _V
+_h=dst/'include/KC_searching.hpp';_h.write_text(_V.compact_closed_header(_h.read_text()))
+_c=dst/'src/KC_searching.cpp';_c.write_text(_V.compact_closed_source(_c.read_text()))
+_q=dst/'src/KC_search_params.cpp';_q.write_text(_V.chain_on_pop(_V.compact_closed_params(_q.read_text())))
 manifest={str(f.relative_to(dst)):hashlib.sha256(f.read_bytes()).hexdigest() for f in dst.rglob('*') if f.is_file()}
 (p/'source_hashes.json').write_text(json.dumps(manifest,indent=2))
 print(dst)

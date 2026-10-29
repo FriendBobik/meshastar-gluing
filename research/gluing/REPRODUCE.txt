@@ -62,3 +62,31 @@ CPU time убирает время вытеснения потока, но не 
 research/gluing/build_cli.sh
 research/gluing/bin/mesh_astar_glued --mode single --map maps/gluing_detour.map --prim data/base_control_set.txt --mesh data/base_mesh_info.txt --start "24 12 0" --goal "24 68 0" --weight 1 --out-prefix research/gluing/results/cli/
 Каталог results/cli создайте заранее. Формат аргументов и текстовых результатов совпадает с авторским CLI. В single-режиме он также запускает LBA* и LazyLBA*.
+
+
+Дополнение 29 октября 2026: компактный CLOSED и сравнение на Linux
+Компактный CLOSED (флаг COMPACT_CLOSED, variants.py) — следствие леммы 1: развёртка пучка является деревом, internal-клетка
+порождается не более одного раза, поэтому CLOSED хранит только initial-клетки со слоем θ (NUM_HEADINGS слоёв вместо MAX_CONFIGS).
+Режим включается во время работы только при g_macro.enabled, то есть если MacroPaths подтвердил единственность предков и совпадение Finals.
+В корневом CLI включён по умолчанию (make COMPACT_CLOSED=0 — выключить). В стенде: варианты glued_closed и chain_on_pop_closed.
+chain_on_pop (GLUING_MODE=4) — альтернативная реализация: цепочка проходится после извлечения вершины из OPEN, в OPEN идут потомки её конца.
+
+Исправление: build.sh передавал компилятору только первый файл массива sources ($sources вместо "${sources[@]}").
+
+Проверки (make test): test_macro, verify_data, verify_tree (леммы 1 и 2 на data/base и data/add), check_variants (все варианты на manual.tsv
+совпадают с baseline по признаку решения и стоимости, пути корректны), CLI на maps/gluing_detour.map (стоимость 74.4033 = LBA*).
+
+Серия на Linux
+  CXX=g++ bash research/gluing/build.sh
+  python3 research/gluing/run_compare.py --jobs 2      # можно прерывать и продолжать: готовые CSV пропускаются (--budget секунд)
+  python3 research/gluing/analyze_compare.py           # results/linux_compare/summary.json
+  python3 research/gluing/plot_compare.py              # figures/compare_time.png, figures/compare_ops.png
+core.tsv: 2 сеанса × (1 прогрев + 5 замеров), во втором сеансе порядок вариантов обратный; holdout.tsv: 1 прогрев + 3 замера;
+counts: один проход бинарников *_counts. Каждый процесс закреплён за своим CPU (sched_setaffinity); одновременно 2 процесса на разных CPU.
+Метрика та же: сумма медиан CPU-времени, ускорение = baseline / вариант, 95% ДИ — бутстрэп по картам (10 000 выборок).
+Машина: Linux-ВМ (aarch64), 4 виртуальных CPU, gcc -O3. Результаты: −20,4% (core) и −18,4% (holdout) для glued_closed;
+стоимости и признак решения совпали с baseline во всех 48 задачах у всех вариантов.
+Ограничения: в holdout только 3 замера; два одновременных процесса могут влиять друг на друга через память.
+
+Отчёт: python3 research/gluing/write_report.py; затем в research/gluing/report дважды xelatex main.tex
+(нужен babel-russian: пакет texlive-lang-cyrillic) или tectonic main.tex.

@@ -203,7 +203,12 @@ MeshGraphParams::MeshGraphParams(Vertex *start, Vertex *finish, Map *map, Contro
 
     this->control_set = control_set;
     this->mesh_info = mesh_info;
+#ifdef COMPACT_CLOSED
+    // Компактный CLOSED только при подтверждённой структуре дерева (MacroPaths проверил лемму 1).
+    this->ast = g_macro.enabled ? new SearchTree(&mesh_info->theta_by_initial_config) : new SearchTree();
+#else
     this->ast = new SearchTree();
+#endif
 }
 
 ptrVertex MeshGraphParams::get_start_vertex() {
