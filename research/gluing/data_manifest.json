@@ -1,0 +1,30 @@
+{
+  "seed": 20261029,
+  "core_count": 24,
+  "holdout_count": 24,
+  "manual_count": 20,
+  "selection": "uniform random per prespecified grid-distance band; no timing-based selection",
+  "files": {
+    "research/gluing/core.tsv": "060f7b6fe451d7a734f6d37ca5af55d83a0f6f46b1a9e457b6b40e8c15b3d16a",
+    "research/gluing/holdout.tsv": "914d908d97273cb00a8a44557550afe0b3c371f0d3247b6c029c20aeed2dac2f",
+    "research/gluing/manual.tsv": "76ec343b50ad467ff76c7de4a8b0ba78a01977f2cb275c0d2f96d6f9d61df3a0",
+    "maps/AR0700SR.map": "9307077deefa5fd6155bdc627994636849d4a017ef91b94a7ac7ed41de08c1dc",
+    "maps/ht_0_hightown.map": "e2f9edd4892f27f04d21de477afd2fc1fed0cd101377faecf205dbb6f88c2c86",
+    "maps/gluing_blocked.map": "cc7faa6400cfc4479f507152f4b3cca53c9ba0c3528a29164ef99bb64943ba97",
+    "maps/my_map.map": "c0136525c4247dfd816344a155b5a38d9249afbab50fd90e92e1ff70bbbe35ca",
+    "maps/gluing_empty.map": "21ce7cf42f2eca2a66570f4d6bbd66614017ef6100984b7a6280fb34434c6482",
+    "maps/w_woundedcoast.map": "25e2a6bf2cc1ec4905a8511617ca0e479c6d3165e4fbb8d2963165de153fc9bb",
+    "maps/AR0307SR.map": "9818f2f40961f2dbca363597f0a0a14b5ceca9e384d8a47b747e00022e5cc50e",
+    "maps/gluing_detour.map": "c7676807b81c87140af218482e78a529a64c51e706bc1a710b1da85a69c46795",
+    "maps/Labyrinth.map": "2e5ed8814fe5b7fa23a3187573031c4b3ac679556d276ae5ff4e50b1d66b3521",
+    "maps/Berlin_2_256.map": "408bc5dfa5195b4bd6ddb50f2605fc60a2211607453a52ac6e1c4df0317faabc",
+    "maps/WheelofWar.map": "dfa1a38d946368da52f15d9b3a8612962c7cdb18692ba051f368f72ee74d3c76",
+    "maps/Moscow_0_512.map": "b7bf3e8ef5b4df0b500612953ba981a6953c13c73c0d4854d0f440a82f8c336f",
+    "maps/Milan_1_256.map": "0454580c110873d39ca1d24c682a6351010e8eeef127d078624a22c929245fcc",
+    "maps/AR0304SR.map": "bd99bc472cb44d0f6e5c614af6164dfe1d79070995ab7c90a65689defb6c833b",
+    "data/base_control_set.txt": "c271e6ac1adc0c4d52101c86ad0dded54439199f14fe58ee719eee58f2d88a33",
+    "data/add_control_set.txt": "c17e3365dc2a7002b7b0cf64944e543c4b85e1e053b6143be2ca77fdde350a12",
+    "data/base_mesh_info.txt": "0e116e2d5c831707db43b35c95e6269fd4314f1ee7cceb108153b78810077a5a",
+    "data/add_mesh_info.txt": "6411170697919c4a8ee35ac92c35fdc05420f2892547db85cee8f045b9769f3e"
+  }
+}

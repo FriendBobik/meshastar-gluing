@@ -1,0 +1,24 @@
+=== Results: Lattice-Based A* ===
+Algorithm Instance: LazyLBA*
+Parameters:
+  Control Set: data/base_control_set.txt
+  Map: maps/gluing_detour.map (with obstacles)
+  Goal Tolerance: R = 0, A = 0 (discrete headings)
+  Heuristic Weight (w): 1
+  Lazy Evaluation: Enabled
+Problem Instance:
+  Start:  (24, 12, 0)
+  Finish: (24, 68, 0)
+Metrics:
+  Solved: Yes
+  Expansions (Steps): 14260
+  Collision Checks: 281014
+  Search Time (s): 0.199286
+  Reconstruction Time (s): 2.7e-05
+  Total Time (s): 0.199313
+  Path Cost: 74.4033
+  Path Length (m): 74.4033
+  AOL Metric: 0.0422531
+--------------------
+Primitive Sequence (IDs):
+448 484 484 484 484 484 484 484 484 484 484 484 484 484 484 484 484 484 484 484 484 532 638 487 487 487 487 487 487 487 487 487 487 487 487 487 487 487 487 487 487 547 

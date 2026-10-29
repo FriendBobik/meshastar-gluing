@@ -1,0 +1,17 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+obj/
+mesh_astar
+/dist/
+*.aux
+*.out
+*.toc
+*.synctex.gz
+/research/gluing/bin/
+/research/gluing/generated/
+/research/gluing/generated_cli/
+/research/gluing/report/fonts/
+/research/gluing/package_files_sha256.json
+/res/

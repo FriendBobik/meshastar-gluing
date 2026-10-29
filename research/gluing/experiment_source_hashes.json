@@ -1,0 +1,7 @@
+{
+  "research/gluing/bench.cpp": "d474a802a3519e62814518fe79d6a0f521e41ad5d002041561725301c14ec11b",
+  "research/gluing/macro_paths.hpp": "50c69f92748b753c31d504c99af72cb6b4e45464106d162c257b87694cf7b878",
+  "research/gluing/gluing_stats.hpp": "426219a90d7dd15df70d7daa5c80233c93f4535d322938d2d018ade78e53f38e",
+  "research/gluing/prepare.py": "f0b4a6e7b6027796404cceb96839e310018e76fb38df08adc4c7c6937034611c",
+  "research/gluing/build.sh": "2de2faaa5ccef42e00802f4b023cfff4339843fcdacd8b799ff8824bc2705128"
+}

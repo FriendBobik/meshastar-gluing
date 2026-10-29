@@ -1,0 +1,66 @@
+{
+  "baseline": {
+    "tasks": 24,
+    "counters": {
+      "push": 24114098,
+      "pop": 23503198,
+      "stale": 1205862,
+      "cell_checks": 286480218,
+      "primitive_checks": 4522176,
+      "prune_calls": 23961567,
+      "heuristic_calls": 24114098,
+      "final_entries": 236960459,
+      "glued_cells": 0,
+      "macro_edges": 0
+    },
+    "cpu_time_not_used_for_performance": true
+  },
+  "previous": {
+    "tasks": 24,
+    "counters": {
+      "push": 20218913,
+      "pop": 19576805,
+      "stale": 1286553,
+      "cell_checks": 264937920,
+      "primitive_checks": 4513180,
+      "prune_calls": 34763765,
+      "heuristic_calls": 20218913,
+      "final_entries": 211550480,
+      "glued_cells": 12235653,
+      "macro_edges": 0
+    },
+    "cpu_time_not_used_for_performance": true
+  },
+  "zero_chain": {
+    "tasks": 24,
+    "counters": {
+      "push": 20123534,
+      "pop": 19483586,
+      "stale": 1286314,
+      "cell_checks": 244805349,
+      "primitive_checks": 4513006,
+      "prune_calls": 20794593,
+      "heuristic_calls": 20123534,
+      "final_entries": 188946286,
+      "glued_cells": 16437645,
+      "macro_edges": 7341223
+    },
+    "cpu_time_not_used_for_performance": true
+  },
+  "glued": {
+    "tasks": 24,
+    "counters": {
+      "push": 18141936,
+      "pop": 17501988,
+      "stale": 2325441,
+      "cell_checks": 237828382,
+      "primitive_checks": 2585067,
+      "prune_calls": 20765894,
+      "heuristic_calls": 18141936,
+      "final_entries": 182830825,
+      "glued_cells": 19443835,
+      "macro_edges": 8876845
+    },
+    "cpu_time_not_used_for_performance": true
+  }
+}

@@ -1,0 +1,253 @@
+--- a/src/KC_searching.cpp
++++ b/src/KC_searching.cpp
+@@ -1,3 +1,4 @@
++#include "gluing_stats.hpp"
+ #include <fstream>
+ #include <sstream>
+ #include <cstring> // For memset
+@@ -209,6 +210,7 @@
+ }
+ 
+ void SearchTree::add_to_open(ptrSearchNode item) {
++    GCOUNT(push);
+     open.push(item);
+ }
+ 
+@@ -270,6 +272,7 @@
+     while (!open_is_empty()) {
+         ptrSearchNode best_node = open.top();
+         open.pop();
++        GCOUNT(pop);
+         
+         // Check if this state is already in CLOSED
+         // (This handles duplicate states added to OPEN with higher costs)
+@@ -277,6 +280,7 @@
+         int layer_index = best_node->vertex->config_id;
+         
+         if (was_expanded(best_node->vertex->i, best_node->vertex->j, layer_index)) {
++            GCOUNT(stale);
+             // Duplicate found -> Discard and recycle
+             HEAP->delete_SearchNode(best_node); 
+         } else {
+--- a/src/KC_search_params.cpp
++++ b/src/KC_search_params.cpp
+@@ -1,3 +1,5 @@
++#include "gluing_stats.hpp"
++#include "macro_paths.hpp"
+ #include <cmath>
+ #include <iostream>
+ #include <algorithm>
+@@ -45,6 +47,7 @@
+        skewing the comparison with standard baselines.
+     */
+ 
++    GCOUNT(cell_checks);
+     if (stats_cnt != nullptr) {
+         (*stats_cnt)++;
+         // Note: Simulated sensor delay can be inserted here for benchmarks.
+@@ -59,6 +62,7 @@
+      'start_idx' allows skipping the first few cells of the trace (optimization).
+     */
+ 
++    GCOUNT(primitive_checks);
+     for (size_t k = start_idx; k < prim->swept_cells_i.size(); k++) {
+         // Compute absolute coordinates of the k-th cell in the collision trace
+         int i_coll = i + prim->swept_cells_i[k];
+@@ -274,6 +278,7 @@
+      pass through one of u_k, and we have already found a path to them (or they are blocked).
+     */
+     
++    GCOUNT(prune_calls);
+     // 1. Basic check: If u itself is already expanded, prune.
+     if (params->ast->was_expanded(i, j, config_id)) return true;
+ 
+@@ -281,7 +286,7 @@
+     if (params->mesh_info->theta_by_initial_config[config_id] >= 0) return false;
+ 
+     // 3. For Non-Initial cells, check reachability of Finals(u).
+-    for (auto p : params->mesh_info->primitives_in_config[config_id]) {
++    for (auto p : params->mesh_info->primitives_in_config[config_id]) { GCOUNT(final_entries);
+         // Unpack properties of the primitive endpoint (potential u_k)
+         int next_theta = get<0>(p);
+         int di = get<1>(p);
+@@ -413,6 +418,20 @@
+ 
+     ptrVertex v = current->vertex;
+     
++#if GLUING_MODE == 1
++    // Earlier prototype: traverse after pop, rechecking pruning at each cell.
++    if (g_macro.enabled && !current->mem_after_closed) {
++        int ci=v->i,cj=v->j,cfg=v->config_id;
++        while (mesh_info->successors[cfg].size()==1) {
++            auto edge=mesh_info->successors[cfg][0];
++            if (get<3>(edge)>=0) break;
++            ci+=get<0>(edge);cj+=get<1>(edge);cfg=get<2>(edge);
++            if (!check_cell(task_map,ci,cj,&checked_cells) || mesh_should_prune(task_map,ci,cj,cfg,this)) return;
++            GCOUNT(glued_cells);
++        }
++        v->i=ci;v->j=cj;v->config_id=cfg;
++    }
++#endif
+     // --- Optimization: Direct Jump to Unique Successor ---
+     // If a non-initial cell has exactly ONE valid reachable Initial Cell (u_k in Finals(u)),
+     // we can skip intermediate steps and jump directly to it.
+@@ -421,7 +440,7 @@
+         tuple<int, int, int, int, int> unique_succ_data; 
+         
+         // Iterate over Finals(v)
+-        for (auto p : mesh_info->primitives_in_config[v->config_id]) {
++        for (auto p : mesh_info->primitives_in_config[v->config_id]) { GCOUNT(final_entries);
+             int next_theta = get<0>(p);
+             int di = get<1>(p);
+             int dj = get<2>(p);
+@@ -491,7 +510,27 @@
+ 
+         if (check_cell(task_map, i, j, &checked_cells) &&
+             !mesh_should_prune(task_map, i, j, next_config, this)) {
+-            
++#if GLUING_MODE >= 2
++            if (g_macro.enabled && mesh_info->theta_by_initial_config[next_config]<0) {
++                const auto &path = (GLUING_MODE==3 && w==1.0f) ?
++                    g_macro.full[next_config] : g_macro.zero[next_config];
++                bool collision=false;
++                const int origin_i=i,origin_j=j;
++                for (const auto &step : path) {
++                    if (!check_cell(task_map,origin_i+step.di,origin_j+step.dj,&checked_cells)) {
++                        collision=true; break;
++                    }
++                    GCOUNT(glued_cells);
++                }
++                if (collision) continue;
++                if (!path.empty()) {
++                    const auto &end=path.back();
++                    i=origin_i+end.di;j=origin_j+end.dj;next_config=end.config;
++                    if (end.prim>=0) cost+=(float)control_set->cost(end.prim);
++                    GCOUNT(macro_edges);
++                }
++            }
++#endif
+             ptrVertex u = HEAP->new_Vertex(i, j, next_config, true);
+             ptrSearchNode new_node = HEAP->new_SearchNode(u);
+             
+@@ -526,7 +565,7 @@
+     // We iterate over Finals(u) (precomputed in primitives_in_config)
+     float min_h = 1e12; // Infinity
+ 
+-    for (auto p : params->mesh_info->primitives_in_config[node->vertex->config_id]) {
++    for (auto p : params->mesh_info->primitives_in_config[node->vertex->config_id]) { GCOUNT(final_entries);
+         int next_theta = get<0>(p);
+         int di = get<1>(p);
+         int dj = get<2>(p);
+@@ -564,6 +603,7 @@
+ }
+ 
+ float MeshGraphParams::heuristic(ptrSearchNode node) {
++    GCOUNT(heuristic_calls);
+     return w * base_heuristic(node, this); 
+ }
+ 
+--- /dev/null
++++ b/src/gluing_state.cpp
+@@ -0,0 +1,4 @@
++#include "gluing_stats.hpp"
++#include "macro_paths.hpp"
++GluingStats g_stats;
++MacroPaths g_macro;
+--- a/src/KC_structs.cpp
++++ b/src/KC_structs.cpp
+@@ -1,3 +1,4 @@
++#include "macro_paths.hpp"
+ #include <cmath>
+ #include <iostream>
+ #include <fstream>
+@@ -298,6 +299,10 @@
+         }
+     }
+ 
++#if GLUING_MODE > 0
++    g_macro=MacroPaths{};
++    g_macro.build(*this);
++#endif
+     cout << "Mesh Configurations loaded successfully from " << _file << endl;
+     file.close();
+ }
+--- /dev/null
++++ b/include/macro_paths.hpp
+@@ -0,0 +1,52 @@
++#pragma once
++#ifndef GLUING_MODE
++#define GLUING_MODE 3
++#endif
++#include <set>
++#include <queue>
++#include <stdexcept>
++#include "KC_structs.hpp"
++struct MacroStep {int di,dj,config,prim;};
++struct MacroPaths {
++ bool enabled=false;
++ std::vector<std::vector<MacroStep>> zero,full;
++ // Conservative gate: unique internal predecessors and finite ancestry rooted at initial.
++ void build(const MeshInfo &m) {
++  size_t n=m.successors.size();zero.assign(n,{});full.assign(n,{});
++  std::vector<int> degree(n,0);std::vector<bool> reached(n,false),used(n,false);std::queue<int> q;
++  for(size_t c=0;c<n;c++) {
++   if(m.theta_by_initial_config[c]>=0){q.push((int)c);reached[c]=true;}
++   if(!m.successors[c].empty())used[c]=true;
++   for(auto e:m.successors[c]) {
++    int d=std::get<2>(e);if(d<0||(size_t)d>=n)return;
++    used[d]=true;
++    if(m.theta_by_initial_config[d]<0&&++degree[d]>1)return;
++   }
++  }
++  while(!q.empty()) {int c=q.front();q.pop();for(auto e:m.successors[c]){int d=std::get<2>(e);if(!reached[d]){reached[d]=true;q.push(d);}}}
++  for(size_t c=0;c<n;c++)if(used[c]&&m.theta_by_initial_config[c]<0&&(degree[c]!=1||!reached[c]))return;
++  // Equal remaining endpoints (after translation) certify zero-cost chains.
++  for(size_t c=0;c<n;c++) {
++   if(m.theta_by_initial_config[c]>=0)continue;
++   int cfg=(int)c,di=0,dj=0;
++   while(m.successors[cfg].size()==1) {
++    auto e=m.successors[cfg][0];int next=std::get<2>(e),prim=std::get<3>(e);
++    bool initial=m.theta_by_initial_config[next]>=0;
++    if(initial!=(prim>=0))return;
++    if(!initial) {
++     std::set<std::tuple<int,int,int,int>> before,after;
++     for(auto f:m.primitives_in_config[cfg])before.emplace(std::get<0>(f),std::get<1>(f),std::get<2>(f),std::get<4>(f));
++     for(auto f:m.primitives_in_config[next])after.emplace(std::get<0>(f),std::get<1>(f)+std::get<0>(e),std::get<2>(f)+std::get<1>(e),std::get<4>(f));
++     if(before!=after)return;
++    }
++    di+=std::get<0>(e);dj+=std::get<1>(e);
++    full[c].push_back({di,dj,next,prim});
++    if(!initial)zero[c].push_back({di,dj,next,prim});
++    cfg=next;if(initial)break;
++    if(full[c].size()>n)return;
++   }
++  }
++  enabled=true;
++ }
++};
++extern MacroPaths g_macro;
+--- /dev/null
++++ b/include/gluing_stats.hpp
+@@ -0,0 +1,9 @@
++#pragma once
++#include <cstdint>
++struct GluingStats {uint64_t push=0,pop=0,stale=0,cell_checks=0,primitive_checks=0,prune_calls=0,heuristic_calls=0,final_entries=0,glued_cells=0,macro_edges=0;};
++extern GluingStats g_stats;
++#ifdef GLUING_COUNTERS
++#define GCOUNT(x) (++g_stats.x)
++#else
++#define GCOUNT(x) ((void)0)
++#endif
+--- a/Makefile
++++ b/Makefile
+@@ -3,8 +3,8 @@
+ OPT1 = -O3 -flto -fuse-linker-plugin 
+ CFLAGS = $(ERR) $(OPT1) 
+ 
+-OBJECTS = obj/KC_heap.o obj/KC_searching.o obj/KC_structs.o obj/KC_testing.o obj/KC_search_params.o obj/KC_algorithms.o
+-HEADERS = include/rassert.hpp include/common.hpp include/KC_astar.hpp include/KC_heap.hpp include/KC_searching.hpp include/KC_structs.hpp include/KC_search_params.hpp include/KC_algorithms.hpp
++OBJECTS = obj/KC_heap.o obj/KC_searching.o obj/KC_structs.o obj/KC_testing.o obj/KC_search_params.o obj/KC_algorithms.o obj/gluing_state.o
++HEADERS = include/rassert.hpp include/common.hpp include/KC_astar.hpp include/KC_heap.hpp include/KC_searching.hpp include/KC_structs.hpp include/KC_search_params.hpp include/KC_algorithms.hpp include/macro_paths.hpp include/gluing_stats.hpp
+ 
+ OUTPUT = mesh_astar
+ 

@@ -1,0 +1,164 @@
+{
+  "time_utc": "2026-10-29T11:35:00Z",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "machine": "arm64",
+  "cpu_model": "Apple M1",
+  "single_thread": true,
+  "hard_cpu_pin": false,
+  "affinity_probe": "KERN_NOT_SUPPORTED (46)",
+  "qos": "USER_INITIATED",
+  "clock": "CLOCK_THREAD_CPUTIME_ID and steady_clock",
+  "schedule": "session1 ABBA, session2 BAAB; 5 measured rounds + 1 warmup in each process",
+  "rounds_per_task_per_variant": 20,
+  "bin_sha256": {
+    "baseline": "879aaba2e5c6f847875c65ca474222cacfb9fbf77651199e8002e04a9cf0644e",
+    "glued": "509cea152e7837694fa8954a65a897c702319ca8c551b04b8abb254786626738"
+  },
+  "tasks_sha256": "060f7b6fe451d7a734f6d37ca5af55d83a0f6f46b1a9e457b6b40e8c15b3d16a",
+  "runs": [
+    {
+      "session": 1,
+      "block": 0,
+      "variant": "baseline",
+      "rows": 120,
+      "wall_seconds": 95.33871793746948,
+      "sum_cpu_ms": 74061.06284099996,
+      "cpu_wall_ratio": 0.9959093520722094,
+      "file": "s1_b0_baseline.csv",
+      "command": [
+        "/Users/aboba/Documents/ChatGPT/\u042f\u043d\u0434\u0435\u043a\u0441 \u0437\u0430\u043b\u0443\u043f\u0430/MeshAStar/research/gluing/bin/baseline",
+        "/Users/aboba/Documents/ChatGPT/\u042f\u043d\u0434\u0435\u043a\u0441 \u0437\u0430\u043b\u0443\u043f\u0430/MeshAStar/research/gluing/core.tsv",
+        "5",
+        "1",
+        "20261129"
+      ],
+      "deterministic": true
+    },
+    {
+      "session": 1,
+      "block": 1,
+      "variant": "glued",
+      "rows": 120,
+      "wall_seconds": 79.02916765213013,
+      "sum_cpu_ms": 62237.55795400001,
+      "cpu_wall_ratio": 0.9760268121650401,
+      "file": "s1_b1_glued.csv",
+      "command": [
+        "/Users/aboba/Documents/ChatGPT/\u042f\u043d\u0434\u0435\u043a\u0441 \u0437\u0430\u043b\u0443\u043f\u0430/MeshAStar/research/gluing/bin/glued",
+        "/Users/aboba/Documents/ChatGPT/\u042f\u043d\u0434\u0435\u043a\u0441 \u0437\u0430\u043b\u0443\u043f\u0430/MeshAStar/research/gluing/core.tsv",
+        "5",
+        "1",
+        "20261129"
+      ],
+      "deterministic": true
+    },
+    {
+      "session": 1,
+      "block": 2,
+      "variant": "glued",
+      "rows": 120,
+      "wall_seconds": 69.81405377388,
+      "sum_cpu_ms": 55783.32733200001,
+      "cpu_wall_ratio": 0.9987166273564206,
+      "file": "s1_b2_glued.csv",
+      "command": [
+        "/Users/aboba/Documents/ChatGPT/\u042f\u043d\u0434\u0435\u043a\u0441 \u0437\u0430\u043b\u0443\u043f\u0430/MeshAStar/research/gluing/bin/glued",
+        "/Users/aboba/Documents/ChatGPT/\u042f\u043d\u0434\u0435\u043a\u0441 \u0437\u0430\u043b\u0443\u043f\u0430/MeshAStar/research/gluing/core.tsv",
+        "5",
+        "1",
+        "20261129"
+      ],
+      "deterministic": true
+    },
+    {
+      "session": 1,
+      "block": 3,
+      "variant": "baseline",
+      "rows": 120,
+      "wall_seconds": 92.71993684768677,
+      "sum_cpu_ms": 72537.98954099999,
+      "cpu_wall_ratio": 0.9472167044849852,
+      "file": "s1_b3_baseline.csv",
+      "command": [
+        "/Users/aboba/Documents/ChatGPT/\u042f\u043d\u0434\u0435\u043a\u0441 \u0437\u0430\u043b\u0443\u043f\u0430/MeshAStar/research/gluing/bin/baseline",
+        "/Users/aboba/Documents/ChatGPT/\u042f\u043d\u0434\u0435\u043a\u0441 \u0437\u0430\u043b\u0443\u043f\u0430/MeshAStar/research/gluing/core.tsv",
+        "5",
+        "1",
+        "20261129"
+      ],
+      "deterministic": true
+    },
+    {
+      "session": 2,
+      "block": 0,
+      "variant": "glued",
+      "rows": 120,
+      "wall_seconds": 110.32274293899536,
+      "sum_cpu_ms": 72226.037794,
+      "cpu_wall_ratio": 0.8050696383084276,
+      "file": "s2_b0_glued.csv",
+      "command": [
+        "/Users/aboba/Documents/ChatGPT/\u042f\u043d\u0434\u0435\u043a\u0441 \u0437\u0430\u043b\u0443\u043f\u0430/MeshAStar/research/gluing/bin/glued",
+        "/Users/aboba/Documents/ChatGPT/\u042f\u043d\u0434\u0435\u043a\u0441 \u0437\u0430\u043b\u0443\u043f\u0430/MeshAStar/research/gluing/core.tsv",
+        "5",
+        "1",
+        "20261229"
+      ],
+      "deterministic": true
+    },
+    {
+      "session": 2,
+      "block": 1,
+      "variant": "baseline",
+      "rows": 120,
+      "wall_seconds": 99.86204218864441,
+      "sum_cpu_ms": 77714.78779199996,
+      "cpu_wall_ratio": 0.9499214823194335,
+      "file": "s2_b1_baseline.csv",
+      "command": [
+        "/Users/aboba/Documents/ChatGPT/\u042f\u043d\u0434\u0435\u043a\u0441 \u0437\u0430\u043b\u0443\u043f\u0430/MeshAStar/research/gluing/bin/baseline",
+        "/Users/aboba/Documents/ChatGPT/\u042f\u043d\u0434\u0435\u043a\u0441 \u0437\u0430\u043b\u0443\u043f\u0430/MeshAStar/research/gluing/core.tsv",
+        "5",
+        "1",
+        "20261229"
+      ],
+      "deterministic": true
+    },
+    {
+      "session": 2,
+      "block": 2,
+      "variant": "baseline",
+      "rows": 120,
+      "wall_seconds": 117.82585906982422,
+      "sum_cpu_ms": 87108.217292,
+      "cpu_wall_ratio": 0.8936454481216183,
+      "file": "s2_b2_baseline.csv",
+      "command": [
+        "/Users/aboba/Documents/ChatGPT/\u042f\u043d\u0434\u0435\u043a\u0441 \u0437\u0430\u043b\u0443\u043f\u0430/MeshAStar/research/gluing/bin/baseline",
+        "/Users/aboba/Documents/ChatGPT/\u042f\u043d\u0434\u0435\u043a\u0441 \u0437\u0430\u043b\u0443\u043f\u0430/MeshAStar/research/gluing/core.tsv",
+        "5",
+        "1",
+        "20261229"
+      ],
+      "deterministic": true
+    },
+    {
+      "session": 2,
+      "block": 3,
+      "variant": "glued",
+      "rows": 120,
+      "wall_seconds": 102.67388916015625,
+      "sum_cpu_ms": 76210.90578700003,
+      "cpu_wall_ratio": 0.8962490276131593,
+      "file": "s2_b3_glued.csv",
+      "command": [
+        "/Users/aboba/Documents/ChatGPT/\u042f\u043d\u0434\u0435\u043a\u0441 \u0437\u0430\u043b\u0443\u043f\u0430/MeshAStar/research/gluing/bin/glued",
+        "/Users/aboba/Documents/ChatGPT/\u042f\u043d\u0434\u0435\u043a\u0441 \u0437\u0430\u043b\u0443\u043f\u0430/MeshAStar/research/gluing/core.tsv",
+        "5",
+        "1",
+        "20261229"
+      ],
+      "deterministic": true
+    }
+  ]
+}

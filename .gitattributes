@@ -1,0 +1,13 @@
+* text=auto
+*.pdf binary
+*.png binary
+# Preserve the exact bytes used in the experiments and their SHA-256 hashes.
+data/** -text -whitespace
+maps/** -text -whitespace
+research/gluing/source_snapshot/** -text -whitespace
+research/gluing/results/** -text -whitespace
+research/gluing/*.tsv -text -whitespace
+research/gluing/gluing.patch -text -whitespace
+# These source templates deliberately contain baseline whitespace in match strings.
+research/gluing/prepare.py -whitespace
+research/gluing/figures/** -text -whitespace

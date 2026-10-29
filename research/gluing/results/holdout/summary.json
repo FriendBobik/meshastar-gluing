@@ -1,0 +1,146 @@
+{
+  "tasks": 24,
+  "repeats": 3,
+  "all_costs_match": true,
+  "all_paths_valid": true,
+  "baseline_sum_median_cpu_ms": 12231.649833999996,
+  "glued_sum_median_cpu_ms": 11115.719832000002,
+  "speedup": 1.1003920590718244,
+  "reduction_pct": 9.123299122724005,
+  "per_task": {
+    "holdout_AR0307SR_add_0": {
+      "baseline_cpu_ms": 28.936333,
+      "glued_cpu_ms": 18.872458,
+      "speedup": 1.5332572471481987
+    },
+    "holdout_AR0307SR_add_1": {
+      "baseline_cpu_ms": 69.867541,
+      "glued_cpu_ms": 43.244,
+      "speedup": 1.615658611599297
+    },
+    "holdout_AR0307SR_add_2": {
+      "baseline_cpu_ms": 991.601375,
+      "glued_cpu_ms": 653.112833,
+      "speedup": 1.5182696234051796
+    },
+    "holdout_AR0307SR_base_0": {
+      "baseline_cpu_ms": 18.412292,
+      "glued_cpu_ms": 16.255583,
+      "speedup": 1.1326749708084909
+    },
+    "holdout_AR0307SR_base_1": {
+      "baseline_cpu_ms": 0.00566699999763,
+      "glued_cpu_ms": 0.00429200000144,
+      "speedup": 1.3203634659200085
+    },
+    "holdout_AR0307SR_base_2": {
+      "baseline_cpu_ms": 266.905833,
+      "glued_cpu_ms": 251.921125,
+      "speedup": 1.0594817445341274
+    },
+    "holdout_AR0700SR_add_0": {
+      "baseline_cpu_ms": 1260.091084,
+      "glued_cpu_ms": 1020.901333,
+      "speedup": 1.2342927208226104
+    },
+    "holdout_AR0700SR_add_1": {
+      "baseline_cpu_ms": 10.884958,
+      "glued_cpu_ms": 6.475208,
+      "speedup": 1.6810205942419145
+    },
+    "holdout_AR0700SR_add_2": {
+      "baseline_cpu_ms": 319.592708,
+      "glued_cpu_ms": 227.049291,
+      "speedup": 1.4075917462345213
+    },
+    "holdout_AR0700SR_base_0": {
+      "baseline_cpu_ms": 0.00345899999957,
+      "glued_cpu_ms": 0.00258400000166,
+      "speedup": 1.3386222899953122
+    },
+    "holdout_AR0700SR_base_1": {
+      "baseline_cpu_ms": 0.00279199999932,
+      "glued_cpu_ms": 0.00370800000019,
+      "speedup": 0.7529665585698319
+    },
+    "holdout_AR0700SR_base_2": {
+      "baseline_cpu_ms": 105.772167,
+      "glued_cpu_ms": 100.182,
+      "speedup": 1.055800113792897
+    },
+    "holdout_ht_0_hightown_add_0": {
+      "baseline_cpu_ms": 1.589792,
+      "glued_cpu_ms": 1.011167,
+      "speedup": 1.57223485339217
+    },
+    "holdout_ht_0_hightown_add_1": {
+      "baseline_cpu_ms": 6.592667,
+      "glued_cpu_ms": 4.297208,
+      "speedup": 1.5341745151735728
+    },
+    "holdout_ht_0_hightown_add_2": {
+      "baseline_cpu_ms": 27.708583,
+      "glued_cpu_ms": 19.218125,
+      "speedup": 1.4417942957494552
+    },
+    "holdout_ht_0_hightown_base_0": {
+      "baseline_cpu_ms": 2986.608166,
+      "glued_cpu_ms": 3095.440416,
+      "speedup": 0.9648411097052756
+    },
+    "holdout_ht_0_hightown_base_1": {
+      "baseline_cpu_ms": 15.447625,
+      "glued_cpu_ms": 14.234334,
+      "speedup": 1.0852369348646729
+    },
+    "holdout_ht_0_hightown_base_2": {
+      "baseline_cpu_ms": 2997.853334,
+      "glued_cpu_ms": 2877.41225,
+      "speedup": 1.0418574307522324
+    },
+    "holdout_w_woundedcoast_add_0": {
+      "baseline_cpu_ms": 1.089375,
+      "glued_cpu_ms": 0.690584,
+      "speedup": 1.5774692144619626
+    },
+    "holdout_w_woundedcoast_add_1": {
+      "baseline_cpu_ms": 208.044583,
+      "glued_cpu_ms": 139.379708,
+      "speedup": 1.4926461389917678
+    },
+    "holdout_w_woundedcoast_add_2": {
+      "baseline_cpu_ms": 712.54875,
+      "glued_cpu_ms": 513.122791,
+      "speedup": 1.3886515323385822
+    },
+    "holdout_w_woundedcoast_base_0": {
+      "baseline_cpu_ms": 15.288458,
+      "glued_cpu_ms": 14.983292,
+      "speedup": 1.0203670862184357
+    },
+    "holdout_w_woundedcoast_base_1": {
+      "baseline_cpu_ms": 1952.753042,
+      "glued_cpu_ms": 1876.638542,
+      "speedup": 1.040558955971821
+    },
+    "holdout_w_woundedcoast_base_2": {
+      "baseline_cpu_ms": 234.04925,
+      "glued_cpu_ms": 221.267,
+      "speedup": 1.057768442650734
+    }
+  },
+  "ablations": {
+    "previous": {
+      "sum_median_cpu_ms": 11607.945540999992,
+      "speedup": 1.0537308079881182,
+      "all_costs_match": true,
+      "all_paths_valid": true
+    },
+    "zero_chain": {
+      "sum_median_cpu_ms": 11161.080790000002,
+      "speedup": 1.095919836451609,
+      "all_costs_match": true,
+      "all_paths_valid": true
+    }
+  }
+}
